@@ -1,2 +1,2 @@
-//app.js
+"use strict";
 ko.applyBindings(new textViewModel(httpRequets));

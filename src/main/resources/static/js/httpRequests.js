@@ -1,3 +1,5 @@
+"use strict";
+
 var httpRequets = {
 		
 		echoText : function(onSuccess, message){
