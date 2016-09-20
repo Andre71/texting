@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-@ComponentScan(basePackages = { "com.johnpoulakos.controllers"})
+@ComponentScan(basePackages = { "com.johnpoulakos.controllers", "com.johnpoulakos.services"})
 @SpringBootApplication
 public class TextingApplication {
 

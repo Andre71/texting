@@ -1,5 +1,7 @@
 package com.johnpoulakos.domain;
 
-public class MessageDao {
+import org.springframework.data.repository.CrudRepository;
 
-}
+
+
+public interface MessageDao  extends CrudRepository<Message, Integer>{}
