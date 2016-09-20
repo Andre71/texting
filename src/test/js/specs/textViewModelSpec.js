@@ -19,9 +19,28 @@ describe("the text view model", function () {
     });
 	
 
-    it("must default the server message seaction to not visible", function () {
+    it("must default the server message section to not visible", function () {
 
         expect(viewModel.isServerMessageVisible()).toBe(false);
+    });    
+    
+    
+    it("must invoke the sendTextSuccessCallback method after sendMessage has been called ", function () {
+
+    	spyOn(viewModel, 'sendTextSuccessCallback') 
+    	viewModel.textMessage("this is a message");
+    	viewModel.sendMessage();    	
+        expect(viewModel.sendTextSuccessCallback).toHaveBeenCalled();
+        
+    });
+    
+    
+    it("must display the same message from the server as the one entered", function () {
+
+    	viewModel.textMessage("this is a message");
+    	viewModel.sendMessage();    	
+        expect(viewModel.serverMessage()).toBe(viewModel.textMessage());
+        
     });
 
 
