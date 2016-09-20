@@ -1,5 +1,5 @@
 "use strict";
-var textViewModel = function(httpRequests){
+function textViewModel (httpRequests){
 	
 	var self = this;
 	
