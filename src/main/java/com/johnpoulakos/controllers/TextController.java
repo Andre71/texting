@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.johnpoulakos.domain.Message;
 import com.johnpoulakos.services.MessageService;
 
 @RestController
@@ -21,7 +22,13 @@ public class TextController {
     }
 	
 	@RequestMapping("/echotext")
-	@ResponseBody ResponseEntity<?> echoText(@RequestParam("text") String text){				
+	@ResponseBody ResponseEntity<?> echoText(@RequestParam("text") String text){		
+		
+		Message message = new Message();		
+		message.setMessageText(text);
+		
+		this.messageService.saveMessage(message);
+		
 		
 		return new ResponseEntity<String>(text, HttpStatus.OK);
 		

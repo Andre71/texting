@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,9 +20,15 @@ public class Message {
 	private Integer id;
 
 	@Temporal(TemporalType.TIMESTAMP)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Date createTimeStamp;
+	
+    @PrePersist
+    protected void onCreate() {
+    	this.createTimeStamp = new Date();
+    }
 
-	private String message;
+	private String messageText;
 
 	public Integer getId() {
 		return id;
@@ -39,12 +46,12 @@ public class Message {
 		this.createTimeStamp = createTimeStamp;
 	}
 
-	public String getMessage() {
-		return message;
+	public String getMessageText() {
+		return messageText;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public void setMessageText(String message) {
+		this.messageText = message;
 	}
 
 }
