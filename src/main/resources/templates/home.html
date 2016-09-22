@@ -12,54 +12,114 @@
 		<div class="hero-unit">
 			<h1>Text Application</h1>
 		</div>
-		
-		
+
 		<form>
-			<div class="row">			
-				<div class="col-md-3">		
-				  	<label for="usr">User Name:</label>
-	 				<input type="text" class="form-control" id="usr" data-bind="value:newTextMessage.textUserName"/>
- 				</div> 				
- 			</div>	
- 			<div class="row">
-				<div class="col-md-9">		
+			<div class="row">
+				<div class="col-md-8">
 					<label for="textmsg">Enter Text:</label>
-					<textarea class="form-control" rows="5" id="textmsg" data-bind="value:newTextMessage.textMessage"></textarea>
+					<textarea class="form-control" rows="3" id="textmsg"
+						data-bind="value:newTextMessage.textMessage"></textarea>
 				</div>
-				
+				<div class="col-md-4">
+					<label for="usr">User Name:</label> 
+					<input type="text"
+						class="form-control" id="usr"
+						data-bind="value:newTextMessage.textUserName" />
+						
+					<div class="text-right">		
+						<button type="submit" class="btn btn-primary"
+							data-bind="click:postMessage">Done</button>
+					</div>
+				</div>
 			</div>
-			<button type="submit" class="btn btn-default" data-bind="click:postMessage">Done</button>
 		</form>
-		
+
 		<div data-bind="visible:isServerMessageVisible">
-			<hr />
 			<strong>Message successfully sent!</strong>
-			<p id="textEchoResponse" data-bind="text:serverMessage" ></p>
+			<p id="textEchoResponse" data-bind="text:serverMessage"></p>
 		</div>
-		
+
 
 		<hr />
 		<h4>All Submissions</h4>
+		<!-- ko if : allPostsByUser().length > 0 -->
+		<div class="row">
+			<div class="col-md-8">
+				<strong>Message:</strong>
+			</div>
+			<div class="col-md-4">
+				<strong>User:</strong>
+			</div>
+		</div>		
+		
+		
+		<!-- /ko -->
 		<!-- ko foreach : allPostsByUser() -->
 		<div class="row">
-			<div class="col-md-3">
-				<strong data-bind="text:userName"></strong>
-			</div>
-			<div class="col-md-3">
+			<div class="col-md-8">
 				<span data-bind="text:messageText"></span>
-			</div>		
+			</div>
+			<div class="col-md-4">
+				<span data-bind="text:userName"></span>
+				<div class="text-right">	
+					<button type="button" class="btn btn-secondary" data-toggle="modal"
+							data-target="#replyModal" >Reply</button>
+				</div>
+			</div>
 		</div>
-		<!-- /ko -->		
+		<!-- /ko -->
 
 
 
 	</div>
-	
+
+	<!-- Reply Modal -->
+	<div class="modal fade" id="replyModal" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Reply</h4>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="row">
+							<div class="col-md-8">
+								<label for="textmsg">Enter Text:</label>
+								<textarea class="form-control" rows="3" id="textmsg"
+									data-bind="value:replyTextMessage.textMessage"></textarea>
+							</div>
+							<div class="col-md-4">
+								<label for="usr">User Name:</label> 
+								<input type="text"
+									class="form-control" id="usr"
+									data-bind="value:replyTextMessage.textUserName" />
+			
+							</div>
+						</div>
+					</form>					
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" 
+							class="btn btn-primary" 
+							data-dismiss="modal"
+							data-bind="click:postReplyMessage"
+							>Reply</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
 	<script th:src="@{/js/jquery-3.1.0.min.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
 	<script th:src="@{/js/knockout-3.4.0.js}"></script>
 	<script th:src="@{/js/httpRequests.js}"></script>
 	<script th:src="@{/js/textViewModel.js}"></script>
 	<script th:src="@{/js/app.js}"></script>
-	
+
 </body>
 </html>

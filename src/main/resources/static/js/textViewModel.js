@@ -14,6 +14,7 @@ function textViewModel (httpRequests){
 	}	
 
 	self.newTextMessage = self.createMessage();
+	self.replyTextMessage = self.createMessage(); 
 	
 	self.serverMessage = ko.observable("");
 	
@@ -30,7 +31,14 @@ function textViewModel (httpRequests){
 		
 		httpRequests.createText(self.postTextSuccessCallback, self.newTextMessage );
 		
+	}
+	
+	self.postReplyMessage = function(){
+		
+		httpRequests.createText(function(){}, self.replyTextMessage );
+		
 	}	
+	
 	
 	self.allPostsByUser = ko.observableArray([]);	
 	self.loadAllPostsByUserCallback = function(data){
