@@ -40,7 +40,7 @@ public class TextControllerTests {
     }
 	
     @Test
-    public void echotextReturnsOkStatusAndCorrectContent() throws Exception {
+    public void createTextReturnsOkStatusAndCorrectContent() throws Exception {
     	
     	stubMessage.setMessageText("johnMessage");
     	stubMessage.setUserName("johnUser");
@@ -56,7 +56,7 @@ public class TextControllerTests {
     
     
     @Test
-    public void echotextReturnsOkStatusAndCorrectContentWithSpacesAndSpecialCharacters() throws Exception {
+    public void createTextReturnsOkStatusAndCorrectContentWithSpacesAndSpecialCharacters() throws Exception {
 
     	stubMessage.setMessageText("john is 'testing' ");
     	stubMessage.setUserName("johnUser");
@@ -71,9 +71,17 @@ public class TextControllerTests {
     }
     
     @Test
-    public void echotextDoesNotReturnOkStatusWhenTextParamMissing() throws Exception {    	
+    public void createTextDoesNotReturnOkStatusWhenTextParamMissing() throws Exception {    	
         mockMvc.perform(post("/createText"))
                 .andExpect(status().isBadRequest());
+    }
+    
+    @Test
+    public void getAlltextsReturnsOkStatus() throws Exception {
+    	
+        mockMvc.perform(get("/getAlltexts"))
+                .andExpect(status().isOk());
+
     }
 
 }

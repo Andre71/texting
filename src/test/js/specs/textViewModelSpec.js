@@ -1,9 +1,23 @@
 describe("the text view model", function () {
 	
+	var allBackEndTextsStub = [];
+	
 	var mockHttpRequets = {			
 			createText : function(onSuccess, message){
 				
 				onSuccess(message.textMessage());
+			},
+			getAllposts : function(onSuccess){
+				
+				allBackEndTextsStub.push({
+					createTimeStamp : 1474516762000,
+					id : 123,
+					messageText : "message text",
+					userName : "userName"
+					
+				});
+				
+				onSuccess(allBackEndTextsStub);
 			}
 	}
 	
@@ -25,7 +39,7 @@ describe("the text view model", function () {
     });    
     
     
-    it("must invoke the postTextSuccessCallback method after postMessage has been called ", function () {
+    it("must invoke the postTextSuccessCallback method after postMessage has been called ", function () {    	
 
     	spyOn(viewModel, 'postTextSuccessCallback') 
     	viewModel.newTextMessage.textMessage("this is a message");
@@ -35,6 +49,15 @@ describe("the text view model", function () {
         
     });
     
+    it("must call and increment allPostsByUser after postMessage has been called  ", function () {
+    	
+    	var expectLength = viewModel.allPostsByUser().length + 1;
+    	viewModel.newTextMessage.textMessage("this is a message");
+    	viewModel.newTextMessage.textUserName("myUserName");    	
+    	viewModel.postMessage();      	
+    	expect(expectLength).toBe(viewModel.allPostsByUser().length);
+    	
+    });
     
     it("must display the same message from the server as the one entered", function () {
 

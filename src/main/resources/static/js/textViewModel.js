@@ -35,7 +35,7 @@ function textViewModel (httpRequests){
 	self.allPostsByUser = ko.observableArray([]);	
 	self.loadAllPostsByUserCallback = function(data){
 		
-		self.allPostsByUser(data)
+		self.allPostsByUser(data);
 		
 	}
 	
