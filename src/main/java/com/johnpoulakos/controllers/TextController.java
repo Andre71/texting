@@ -31,5 +31,13 @@ public class TextController {
 		return new ResponseEntity<String>(message.getMessageText(), HttpStatus.OK);
 		
 	}
+	
+	
+	@RequestMapping("/getAlltexts")
+	@ResponseBody ResponseEntity<?> getAlltexts(){			
+		
+		return new ResponseEntity<Iterable<Message>>(this.messageService.getAllMessages(), HttpStatus.OK);
+		
+	}
 
 }

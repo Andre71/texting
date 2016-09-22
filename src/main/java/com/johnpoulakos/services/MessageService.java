@@ -5,5 +5,7 @@ import com.johnpoulakos.domain.Message;
 public interface MessageService {
  
     Message saveMessage(Message message);
+    
+    Iterable<Message> getAllMessages();
 
 }

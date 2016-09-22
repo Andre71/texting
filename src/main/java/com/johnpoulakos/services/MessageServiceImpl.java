@@ -1,6 +1,10 @@
 package com.johnpoulakos.services;
 
+
+import javax.persistence.OrderBy;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.johnpoulakos.domain.Message;
@@ -20,6 +24,12 @@ public class MessageServiceImpl implements MessageService {
 	public Message saveMessage(Message message) {
 		
 		 return messageDao.save(message);
+	}
+	
+	@Override
+	public  Iterable<Message> getAllMessages() {
+		
+		 return messageDao.findAll(new Sort(Sort.Direction.ASC, "userName"));
 	}
 
 }
