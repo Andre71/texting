@@ -18,7 +18,9 @@ public class Message {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-
+	
+	private Integer replyToTextId;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Date createTimeStamp;
@@ -38,6 +40,14 @@ public class Message {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Integer getReplyToTextId() {
+		return replyToTextId;
+	}
+
+	public void setReplyToTextId(Integer replyToTextId) {
+		this.replyToTextId = replyToTextId;
 	}
 
 	public Date getCreateTimeStamp() {

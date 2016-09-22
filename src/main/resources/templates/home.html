@@ -62,8 +62,11 @@
 			<div class="col-md-4">
 				<span data-bind="text:userName"></span>
 				<div class="text-right">	
-					<button type="button" class="btn btn-secondary" data-toggle="modal"
-							data-target="#replyModal" >Reply</button>
+					<button type="button" class="btn btn-secondary" 
+							data-toggle="modal"
+							data-target="#replyModal" 
+							data-bind="click:function($data){ $parent.replyTextMessage.replyToTextId($data.id) }"
+							>Reply</button>
 				</div>
 			</div>
 		</div>
@@ -81,7 +84,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Reply</h4>
+					<h4 class="modal-title">Reply - <!--  ko text : replyTextMessage.replyToTextId() --><!-- /ko --></h4>
 				</div>
 				<div class="modal-body">
 					<form>
@@ -105,9 +108,10 @@
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					<button type="button" 
 							class="btn btn-primary" 
+							data-bind="click:function(){ postReplyMessage()}"
 							data-dismiss="modal"
-							data-bind="click:postReplyMessage"
 							>Reply</button>
+							
 				</div>
 			</div>
 

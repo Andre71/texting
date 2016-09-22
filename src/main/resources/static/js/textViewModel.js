@@ -8,7 +8,8 @@ function textViewModel (httpRequests){
 		
 		return {		
 			textUserName : ko.observable(""), 
-			textMessage : ko.observable("")
+			textMessage : ko.observable(""),
+			replyToTextId : ko.observable("")
 		}
 		
 	}	
@@ -34,7 +35,7 @@ function textViewModel (httpRequests){
 	}
 	
 	self.postReplyMessage = function(){
-		
+
 		httpRequests.createText(function(){}, self.replyTextMessage );
 		
 	}	

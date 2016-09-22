@@ -30,12 +30,8 @@ var httpRequets = {
 			    url: '/getAlltexts',
 			    type: 'GET',
 			    contentType: "application/json",
-			    success: function(data){ 
-			    	
-			    	console.log(typeof data)
-			    	console.log(data);			    	
+			    success: function(data){	    	
 			    	onSuccess(data);
-
 			    },
 			    error: function() {
 			        alert('Transmission Error'); 
