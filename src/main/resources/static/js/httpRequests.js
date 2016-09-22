@@ -2,15 +2,15 @@
 
 var httpRequets = {
 		
-		createText : function(onSuccess, messageText, userName){
+		createText : function(onSuccess, textMessageObj){
 			
 			$.ajax({
 			    url: '/createText',
 			    type: 'POST',
 			    contentType: "application/json",
 			    data : JSON.stringify({			    	
-			    	messageText : messageText, 
-			    	userName : userName
+			    	messageText : textMessageObj.textMessage(), 			
+			    	userName : textMessageObj.textUserName()
 			    }),
 			    success: function(data){ 
 			    	

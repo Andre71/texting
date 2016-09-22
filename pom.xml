@@ -15,7 +15,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.3.7.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
@@ -57,6 +57,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -65,48 +70,49 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-	      <plugin>
-	        <groupId>com.github.searls</groupId>
-	        <artifactId>jasmine-maven-plugin</artifactId>
-	        <version>2.2</version>
-	        <executions>
-				<!-- for running 'mvn jasmine:bdd'  to start jasmine server -->
-				<!-- run tests by using browser to connect to the server on URL shown on the console -->
-				<!-- test run results are shown on the browser -->
-				<execution>
-					<id>jasmine-bdd</id>
-					<goals>
-						<goal>bdd</goal>
-					</goals>
-				</execution>
-				
-				<!-- for running 'mvn test' -->
-				<!-- test run results are shown on the console output -->
-				<execution>
-	                <id>jasmine-test</id>
-					<goals>
-						<goal>test</goal>
-					</goals>
-				</execution>
-	        </executions>
-			<configuration>
-				<haltOnFailure>false</haltOnFailure>
-			    <preloadSources>
-			        <source>${project.basedir}/src/main/resources/static/js/jquery-3.1.0.min.js</source>
-			        <source>${project.basedir}/src/main/resources/static/js/knockout-3.4.0.js</source>
-			        <source>${project.basedir}/src/main/resources/static/js/textViewModel.js</source>
-			    </preloadSources>
+			<plugin>
+				<groupId>com.github.searls</groupId>
+				<artifactId>jasmine-maven-plugin</artifactId>
+				<version>2.2</version>
+				<executions>
+					<!-- for running 'mvn jasmine:bdd' to start jasmine server -->
+					<!-- run tests by using browser to connect to the server on URL shown 
+						on the console -->
+					<!-- test run results are shown on the browser -->
+					<execution>
+						<id>jasmine-bdd</id>
+						<goals>
+							<goal>bdd</goal>
+						</goals>
+					</execution>
 
-			    <jsSrcDir>src/main/webapp/js</jsSrcDir>
+					<!-- for running 'mvn test' -->
+					<!-- test run results are shown on the console output -->
+					<execution>
+						<id>jasmine-test</id>
+						<goals>
+							<goal>test</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<haltOnFailure>false</haltOnFailure>
+					<preloadSources>
+						<source>${project.basedir}/src/main/resources/static/js/jquery-3.1.0.min.js</source>
+						<source>${project.basedir}/src/main/resources/static/js/knockout-3.4.0.js</source>
+						<source>${project.basedir}/src/main/resources/static/js/textViewModel.js</source>
+					</preloadSources>
 
-			    <jsTestSrcDir>src/test/js/specs</jsTestSrcDir>
-			    <specIncludes>
-			        <include>*Spec.js</include>
-			    </specIncludes>
-			</configuration>
-	      </plugin>
+					<jsSrcDir>src/main/webapp/js</jsSrcDir>
+
+					<jsTestSrcDir>src/test/js/specs</jsTestSrcDir>
+					<specIncludes>
+						<include>*Spec.js</include>
+					</specIncludes>
+				</configuration>
+			</plugin>
 		</plugins>
-		
+
 		<finalName>texting</finalName>
 	</build>
 

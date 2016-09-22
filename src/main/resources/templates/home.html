@@ -16,17 +16,17 @@
 			<div class="row">			
 				<div class="col-md-3">		
 				  	<label for="usr">User Name:</label>
-	 				<input type="text" class="form-control" id="usr" data-bind="value:textUserName"/>
+	 				<input type="text" class="form-control" id="usr" data-bind="value:newTextMessage.textUserName"/>
  				</div> 				
  			</div>	
  			<div class="row">
 				<div class="col-md-9">		
 					<label for="textmsg">Enter Text:</label>
-					<textarea class="form-control" rows="5" id="textmsg" data-bind="value:textMessage"></textarea>
+					<textarea class="form-control" rows="5" id="textmsg" data-bind="value:newTextMessage.textMessage"></textarea>
 				</div>
 				
 			</div>
-			<button type="submit" class="btn btn-default" data-bind="click:sendMessage">Done</button>
+			<button type="submit" class="btn btn-default" data-bind="click:postMessage">Done</button>
 		</form>
 		
 		<div data-bind="visible:isServerMessageVisible">
@@ -47,7 +47,7 @@
  			</div>	
  			<div class="row">
 				<div class="col-md-3">
-					<button type="submit" class="btn btn-default" data-bind="click:sendMessage">Search</button>	
+					<button type="submit" class="btn btn-default" >Search</button>	
 				</div>	
 			</div>
 			

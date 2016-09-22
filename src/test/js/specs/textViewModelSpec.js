@@ -1,9 +1,9 @@
 describe("the text view model", function () {
 	
 	var mockHttpRequets = {			
-			echoText : function(onSuccess, message){
+			createText : function(onSuccess, message){
 				
-				onSuccess(message);
+				onSuccess(message.textMessage());
 			}
 	}
 	
@@ -25,21 +25,23 @@ describe("the text view model", function () {
     });    
     
     
-    it("must invoke the sendTextSuccessCallback method after sendMessage has been called ", function () {
+    it("must invoke the postTextSuccessCallback method after postMessage has been called ", function () {
 
-    	spyOn(viewModel, 'sendTextSuccessCallback') 
-    	viewModel.textMessage("this is a message");
-    	viewModel.sendMessage();    	
-        expect(viewModel.sendTextSuccessCallback).toHaveBeenCalled();
+    	spyOn(viewModel, 'postTextSuccessCallback') 
+    	viewModel.newTextMessage.textMessage("this is a message");
+    	viewModel.newTextMessage.textUserName("myUserName");    	
+    	viewModel.postMessage();    	
+        expect(viewModel.postTextSuccessCallback).toHaveBeenCalled();
         
     });
     
     
     it("must display the same message from the server as the one entered", function () {
 
-    	viewModel.textMessage("this is a message");
-    	viewModel.sendMessage();    	
-        expect(viewModel.serverMessage()).toBe(viewModel.textMessage());
+    	viewModel.newTextMessage.textMessage("this is a message");
+    	viewModel.newTextMessage.textUserName("myUserName");  
+    	viewModel.postMessage();    	
+        expect(viewModel.serverMessage()).toBe(viewModel.newTextMessage.textMessage());
         
     });
 
