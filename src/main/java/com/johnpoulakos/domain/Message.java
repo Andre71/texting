@@ -29,6 +29,8 @@ public class Message {
     }
 
 	private String messageText;
+	
+	private String userName;
 
 	public Integer getId() {
 		return id;
@@ -52,6 +54,14 @@ public class Message {
 
 	public void setMessageText(String message) {
 		this.messageText = message;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 }

@@ -13,21 +13,53 @@
 			<h1>Text Application</h1>
 		</div>
 		<form>
-			<div class="form-group">
-
-				<label for="textmsg">Enter Text:</label>
-				<textarea class="form-control" rows="5" id="textmsg" data-bind="value:textMessage"></textarea>
-
+			<div class="row">			
+				<div class="col-md-3">		
+				  	<label for="usr">User Name:</label>
+	 				<input type="text" class="form-control" id="usr" data-bind="value:textUserName"/>
+ 				</div> 				
+ 			</div>	
+ 			<div class="row">
+				<div class="col-md-9">		
+					<label for="textmsg">Enter Text:</label>
+					<textarea class="form-control" rows="5" id="textmsg" data-bind="value:textMessage"></textarea>
+				</div>
+				
 			</div>
 			<button type="submit" class="btn btn-default" data-bind="click:sendMessage">Done</button>
 		</form>
-
+		
 		<div data-bind="visible:isServerMessageVisible">
 			<hr />
 			<strong>Message successfully sent!</strong>
 			<p id="textEchoResponse" data-bind="text:serverMessage" ></p>
 		</div>
 		
+
+		<hr />
+		<h4>Search Submissions by User Name</h4>
+		<form>			
+			<div class="row">		
+				<div class="col-md-3">		
+				  	<label for="usrFilter">User Name:</label>
+	 				<input type="text" class="form-control" id="usrFilter" />
+ 				</div>
+ 			</div>	
+ 			<div class="row">
+				<div class="col-md-3">
+					<button type="submit" class="btn btn-default" data-bind="click:sendMessage">Search</button>	
+				</div>	
+			</div>
+			
+		</form>
+		
+		<div>
+			<hr />
+			<strong>All Submissions for <span></span></strong>
+			
+		</div>
+
+
 	</div>
 	
 	<script th:src="@{/js/jquery-3.1.0.min.js}"></script>

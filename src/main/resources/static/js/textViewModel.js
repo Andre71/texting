@@ -3,6 +3,7 @@ function textViewModel (httpRequests){
 	
 	var self = this;
 	
+	self.textUserName = ko.observable(""); 
 	self.textMessage = ko.observable("");
 	self.serverMessage = ko.observable("");
 	
@@ -16,7 +17,7 @@ function textViewModel (httpRequests){
 	
 	self.sendMessage = function(){
 		
-		httpRequests.echoText(self.sendTextSuccessCallback, self.textMessage());
+		httpRequests.createText(self.sendTextSuccessCallback, self.textMessage(), self.textUserName() );
 		
 	}	
 	
