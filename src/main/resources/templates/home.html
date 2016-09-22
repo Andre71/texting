@@ -12,6 +12,8 @@
 		<div class="hero-unit">
 			<h1>Text Application</h1>
 		</div>
+		
+		
 		<form>
 			<div class="row">			
 				<div class="col-md-3">		
@@ -37,27 +39,18 @@
 		
 
 		<hr />
-		<h4>Search Submissions by User Name</h4>
-		<form>			
-			<div class="row">		
-				<div class="col-md-3">		
-				  	<label for="usrFilter">User Name:</label>
-	 				<input type="text" class="form-control" id="usrFilter" />
- 				</div>
- 			</div>	
- 			<div class="row">
-				<div class="col-md-3">
-					<button type="submit" class="btn btn-default" >Search</button>	
-				</div>	
+		<h4>All Submissions</h4>
+		<!-- ko foreach : allPostsByUser() -->
+		<div class="row">
+			<div class="col-md-3">
+				<strong data-bind="text:userName"></strong>
 			</div>
-			
-		</form>
-		
-		<div>
-			<hr />
-			<strong>All Submissions for <span></span></strong>
-			
+			<div class="col-md-3">
+				<span data-bind="text:messageText"></span>
+			</div>		
 		</div>
+		<!-- /ko -->		
+
 
 
 	</div>

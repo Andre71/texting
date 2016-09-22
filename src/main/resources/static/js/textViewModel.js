@@ -22,6 +22,7 @@ function textViewModel (httpRequests){
 		
 		self.serverMessage(data);
 		self.isServerMessageVisible(true);
+		self.loadAllPostsByUser();
 		
 	}
 	
@@ -38,7 +39,7 @@ function textViewModel (httpRequests){
 		
 	}
 	
-	self.loadAllPostsByUser = function(data){
+	self.loadAllPostsByUser = function(){
 		
 		httpRequests.getAllposts(self.loadAllPostsByUserCallback );
 		
