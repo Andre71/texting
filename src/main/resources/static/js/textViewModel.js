@@ -31,5 +31,23 @@ function textViewModel (httpRequests){
 		
 	}	
 	
+	self.allPostsByUser = ko.observableArray([]);	
+	self.loadAllPostsByUserCallback = function(data){
+		
+		self.allPostsByUser(data)
+		
+	}
+	
+	self.loadAllPostsByUser = function(data){
+		
+		httpRequests.getAllposts(self.loadAllPostsByUserCallback );
+		
+	}
+	
+	self.init = function(){
+		self.loadAllPostsByUser();
+		
+	}();
+	
 	
 }
