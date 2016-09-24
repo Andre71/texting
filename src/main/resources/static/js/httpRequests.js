@@ -11,7 +11,9 @@ var httpRequets = {
 			    data : JSON.stringify({			    	
 			    	messageText : textMessageObj.textMessage(), 			
 			    	userName : textMessageObj.textUserName(),
-			    	replyToTextId : textMessageObj.replyToTextId()
+			    	replyToTextId : textMessageObj.replyToTextId(),
+			    	city : textMessageObj.city(),
+			    	province : textMessageObj.province()		    	
 			    	
 			    }),
 			    success: function(data){ 

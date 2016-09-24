@@ -96,7 +96,7 @@
 					</execution>
 				</executions>
 				<configuration>
-
+ 
 					<preloadSources>
 						<source>${project.basedir}/src/main/resources/static/js/jquery-3.1.0.min.js</source>
 						<source>${project.basedir}/src/main/resources/static/js/knockout-3.4.0.js</source>

@@ -3,13 +3,16 @@ function textViewModel (httpRequests){
 	
 	var self = this;	
 	
+	self.provinces = ["AB","BC","MB","NB","NL","NS","NT","NU","ON","PE","QC","SK","YT"];
 	
 	self.createMessage = function(){
 		
 		return {		
 			textUserName : ko.observable(""), 
 			textMessage : ko.observable(""),
-			replyToTextId : ko.observable("")
+			replyToTextId : ko.observable(""),
+			city : ko.observable(""),
+			province : ko.observable("")
 		}
 		
 	}
