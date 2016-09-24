@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,13 +39,18 @@ public class MessageServiceTest {
 		
 		this.messageService = messageService;
 		
-	}		
+	}	
+	
+	
+    @Before
+    public void clearData() {
+
+    	this.messageDao.deleteAll();
+    }
+
 	
     @Test
-    public void testFindallSortsByUserName(){   	
-		
-    	
-    	this.messageDao.deleteAll();
+    public void testFindallSortsByUserName(){
 
 		String messageText = "This is a message";
 		
@@ -73,11 +79,36 @@ public class MessageServiceTest {
 	    	
 	    	assertEquals(usersSorted[counter++], msgGroup.getMessage().getUserName());
 	    		
-	    }
+	    }	
 		
-			    
+    }
+    
+    @Test
+    public void testResponsesAreMapptedToMessages(){   
+    	
+		Message message = new Message();
+		message.setMessageText("test message");
+		message.setUserName("userA");
 		
+		Message confirm = this.messageDao.save(message);
+	
+		String replyString = "reply message";
 		
+		Message reply = new Message();	
+		reply.setMessageText(replyString);
+		reply.setUserName("userB");		
+		reply.setReplyToTextId(confirm.getId());
+		this.messageDao.save(reply);
+		
+		Iterable<Message> allMessages = this.messageService.getAllMessages();
+		List<MessageGroup> messageGrouplist = this.messageService.getMessgeGroup(allMessages);
+		
+		assertEquals(messageGrouplist.size(), 1);
+		assertEquals(messageGrouplist.get(0).getMessage().getId(),
+				messageGrouplist.get(0).getReplies().get(0).getReplyToTextId());
+		assertEquals(replyString,
+				messageGrouplist.get(0).getReplies().get(0).getMessageText());
+    	
     }
 	
 

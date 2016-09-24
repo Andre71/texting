@@ -12,9 +12,7 @@ public class MessageGroupBuilder {
 	
 	public static List<MessageGroup> sortByUser(List<MessageGroup> messageGroupList){
 
-		Collections.sort(messageGroupList, 
-								(o1, o2) -> o1.getMessage().getUserName().compareTo(o2.getMessage().getUserName()));
-		
+		Collections.sort(messageGroupList,(o1, o2) -> o1.getMessage().getUserName().compareTo(o2.getMessage().getUserName()));
 		
 		return messageGroupList;
 	}
