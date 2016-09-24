@@ -3,8 +3,6 @@ function textViewModel (httpRequests){
 	
 	var self = this;	
 	
-	self.provinces = ["AB","BC","MB","NB","NL","NS","NT","NU","ON","PE","QC","SK","YT"];
-	
 	self.createMessage = function(){
 		
 		return {		
@@ -12,20 +10,29 @@ function textViewModel (httpRequests){
 			textMessage : ko.observable(""),
 			replyToTextId : ko.observable(""),
 			city : ko.observable(""),
-			province : ko.observable("")
-		}
-		
+			locationQuery : ko.observable("")
+		}		
 	}
+
 	
 	self.clearMessages = function(message){		
 		message.textUserName("");
 		message.textMessage("");
-		message.replyToTextId("");		
+		message.replyToTextId("");
+		message.city("");
+		self.cityList([]);
 	}
 
 	self.newTextMessage = self.createMessage();
 	self.replyTextMessage = self.createMessage(); 
 	
+	self.enableDoneButton = ko.computed(function() {
+	    return 	self.newTextMessage.textUserName() &&
+			    self.newTextMessage.textMessage() &&
+			    self.newTextMessage.city() &&
+			    self.newTextMessage.locationQuery(); 
+	}, self);
+		
 	self.serverMessage = ko.observable("");
 	
 	self.isServerMessageVisible = ko.observable(false);
@@ -69,6 +76,40 @@ function textViewModel (httpRequests){
 		httpRequests.getAllposts(self.loadAllPostsByUserCallback );
 		
 	}
+	
+	self.cityList = ko.observableArray([]);
+	
+	self.getCityListCallback = function(data){		
+		
+		
+		if(data.response.hasOwnProperty("results")){
+			
+			self.cityList([]);
+			
+			for (var i = 0; i < data.response.results.length; i++){
+			
+				self.cityList.push({
+					"locationString" : data.response.results[i].city + " - " + data.response.results[i].state + "-" + data.response.results[i].country_name,
+					"locationQuery" : data.response.results[i].l						
+				})
+				
+			}
+			
+		}else{
+			
+			alert("No results found for city : " + self.newTextMessage.city());
+		}
+		
+	}
+	
+
+	
+	self.getCityList = function(){
+		
+		httpRequests.getCityList(self.newTextMessage.city(), self.getCityListCallback );
+		
+	}
+	
 	
 	self.init = function(){
 		self.loadAllPostsByUser();

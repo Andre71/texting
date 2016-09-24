@@ -1,6 +1,7 @@
 package com.johnpoulakos.controllers;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class WeatherController {	
 
-	@RequestMapping(value="/cityLookup/{city}", method=RequestMethod.GET)
+	@RequestMapping(value="/cityLookup/{city}", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody ResponseEntity<?> getPossibleCities(@PathVariable String city){			
 				
 		RestTemplate restTemplate = new RestTemplate();

@@ -16,19 +16,23 @@
 
 		<form>
 			<div class="row">
-				<div class="col-md-3">
+				<div class="col-md-4">
 					<label for="textmsg">Enter Text:</label>
 					<textarea class="form-control" rows="4" id="textmsg"
 						data-bind="value:newTextMessage.textMessage"></textarea>
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-3">
 					<label for="usr">Your City:</label> 
 					<input type="text"
 						class="form-control" id="usr"
-						data-bind="value:newTextMessage.city" />
-						
-					<label for="province">Province:</label> 
-					<select class="form-control" id="province" data-bind="options:provinces, value:newTextMessage.province"></select>
+						data-bind="value:newTextMessage.city,
+								   event: {blur :  getCityList }" />
+					
+					<!-- ko if : cityList().length > 0  -->						
+					<label for="province">Location:</label> 
+					<select class="form-control"
+							data-bind="options: cityList, value: newTextMessage.locationQuery, optionsText: 'locationString', optionsValue: 'locationQuery'"></select>
+					<!-- /ko -->			
 
 				</div>
 				<div class="col-md-2">
@@ -39,7 +43,8 @@
 						
 					<div class="text-right button-wrap">		
 						<button type="submit" class="btn btn-primary"
-							data-bind="click:postMessage">Done</button>
+							data-bind="click:postMessage, enable:enableDoneButton"
+							>Done</button>
 					</div>
 				</div>
 

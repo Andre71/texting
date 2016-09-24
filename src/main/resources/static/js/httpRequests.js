@@ -12,8 +12,7 @@ var httpRequets = {
 			    	messageText : textMessageObj.textMessage(), 			
 			    	userName : textMessageObj.textUserName(),
 			    	replyToTextId : textMessageObj.replyToTextId(),
-			    	city : textMessageObj.city(),
-			    	province : textMessageObj.province()		    	
+			    	city : textMessageObj.city()		    	
 			    	
 			    }),
 			    success: function(data){ 
@@ -42,6 +41,22 @@ var httpRequets = {
 			    }
 			});
 			
-		}	
+		},	
+		
+		getCityList : function(cityName, onSuccess){
+
+			$.ajax({
+			    url: '/cityLookup/' + cityName,
+			    type: 'GET',
+			    contentType: "application/json",
+			    success: function(data){	
+			    	onSuccess(data);
+			    },
+			    error: function() {
+			        alert('Transmission Error'); 
+			    }
+			});			
+			
+		}
 		
 }
