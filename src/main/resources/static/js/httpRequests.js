@@ -29,7 +29,7 @@ var httpRequets = {
 		getAllposts : function(onSuccess){
 			
 			$.ajax({
-			    url: '/getAlltexts',
+			    url: '/getAllTextsWithReplies',
 			    type: 'GET',
 			    contentType: "application/json",
 			    success: function(data){	    	

@@ -12,7 +12,13 @@ function textViewModel (httpRequests){
 			replyToTextId : ko.observable("")
 		}
 		
-	}	
+	}
+	
+	self.clearMessages = function(message){		
+		message.textUserName("");
+		message.textMessage("");
+		message.replyToTextId("");		
+	}
 
 	self.newTextMessage = self.createMessage();
 	self.replyTextMessage = self.createMessage(); 
@@ -24,6 +30,7 @@ function textViewModel (httpRequests){
 		
 		self.serverMessage(data);
 		self.isServerMessageVisible(true);
+		self.clearMessages(self.newTextMessage);
 		self.loadAllPostsByUser();
 		
 	}
@@ -32,11 +39,17 @@ function textViewModel (httpRequests){
 		
 		httpRequests.createText(self.postTextSuccessCallback, self.newTextMessage );
 		
+	}	
+	
+	self.postReplyMessageCallback = function(){
+		
+		self.loadAllPostsByUser();
+		self.clearMessages(self.replyTextMessage);		
 	}
 	
 	self.postReplyMessage = function(){
 
-		httpRequests.createText(function(){}, self.replyTextMessage );
+		httpRequests.createText(self.postReplyMessageCallback, self.replyTextMessage );
 		
 	}	
 	

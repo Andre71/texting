@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!-- Bootstrap -->
 <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/app.css}" />
 </head>
 <body>
 	<div class="container">
@@ -51,25 +52,40 @@
 				<strong>User:</strong>
 			</div>
 		</div>		
-		
-		
 		<!-- /ko -->
 		<!-- ko foreach : allPostsByUser() -->
 		<div class="row">
 			<div class="col-md-8">
-				<span data-bind="text:messageText"></span>
+				<span data-bind="text:message.messageText"></span>
 			</div>
-			<div class="col-md-4">
-				<span data-bind="text:userName"></span>
+			<div class="col-md-2">
+				<span data-bind="text:message.userName"></span>
+			</div>
+			<div class="col-md-2">
 				<div class="text-right">	
 					<button type="button" class="btn btn-secondary" 
 							data-toggle="modal"
 							data-target="#replyModal" 
-							data-bind="click:function($data){ $parent.replyTextMessage.replyToTextId($data.id) }"
+							data-bind="click:function($data){ $parent.replyTextMessage.replyToTextId($data.message.id) }"
 							>Reply</button>
-				</div>
+				</div>							
 			</div>
 		</div>
+			<!-- ko if : replies.length > 0 -->
+				<!-- ko foreach : replies -->
+
+				<div class="row reply">
+					<div class="col-md-8">
+						<span data-bind="text:messageText"></span>
+					</div>
+					<div class="col-md-4">
+						<span data-bind="text:userName"></span>
+					</div>
+				</div>					
+
+				<!-- /ko -->
+			<!-- /ko -->
+			<hr />
 		<!-- /ko -->
 
 

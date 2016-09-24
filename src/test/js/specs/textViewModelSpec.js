@@ -60,13 +60,47 @@ describe("the text view model", function () {
     });
     
     it("must display the same message from the server as the one entered", function () {
-
+    	var message = "this is a message";
     	viewModel.newTextMessage.textMessage("this is a message");
     	viewModel.newTextMessage.textUserName("myUserName");  
     	viewModel.postMessage();    	
-        expect(viewModel.serverMessage()).toBe(viewModel.newTextMessage.textMessage());
+        expect(viewModel.serverMessage()).toBe(message);
         
     });
+    
+    it("must clear the text form once the postMessage has been called ", function () {  
+    	
+    	viewModel.newTextMessage.textMessage("this is a message");
+    	viewModel.newTextMessage.textUserName("myUserName");  	
+    	viewModel.postMessage();    	
+        expect(viewModel.newTextMessage.textMessage()).toBe("");
+        expect(viewModel.newTextMessage.textUserName()).toBe("");
 
+    	
+    })
+    
+    it("must invoke the postReplyMessageCallback method after postReplyMessage has been called ", function () {    	
+
+    	spyOn(viewModel, 'postReplyMessageCallback') 
+    	viewModel.replyTextMessage.textMessage("this is a message");
+    	viewModel.replyTextMessage.textUserName("myUserName");
+    	viewModel.replyTextMessage.replyToTextId(123);    	
+    	viewModel.postReplyMessage();    	
+        expect(viewModel.postReplyMessageCallback).toHaveBeenCalled();
+
+    });
+
+    
+    it("must clear the reply form once the postReplyMessage has been called ", function () {  
+    	
+    	viewModel.replyTextMessage.textMessage("this is a message");
+    	viewModel.replyTextMessage.textUserName("myUserName");
+    	viewModel.replyTextMessage.replyToTextId(123);    	
+    	viewModel.postReplyMessage();    	
+        expect(viewModel.replyTextMessage.textMessage()).toBe("");
+        expect(viewModel.replyTextMessage.textUserName()).toBe("");
+        expect(viewModel.replyTextMessage.replyToTextId()).toBe("");
+    	
+    })
 
 });

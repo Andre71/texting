@@ -2,19 +2,20 @@ package com.johnpoulakos.utils;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.johnpoulakos.domain.Message;
 import com.johnpoulakos.domain.MessageGroup;
 
 public class MessageGroupBuilder {
 	
-	
 	public static List<MessageGroup> sortByUser(List<MessageGroup> messageGroupList){
-
-		Collections.sort(messageGroupList,(o1, o2) -> o1.getMessage().getUserName().compareTo(o2.getMessage().getUserName()));
 		
-		return messageGroupList;
+		return messageGroupList.stream()
+				.sorted(Comparator.comparing(x -> x.getMessage().getUserName(), String::compareToIgnoreCase))
+				.collect(Collectors.toList());
 	}
 	
 	
