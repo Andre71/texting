@@ -10,7 +10,9 @@ var httpRequets = {
 			    contentType: "application/json",
 			    data : JSON.stringify({			    	
 			    	messageText : textMessageObj.textMessage(), 			
-			    	userName : textMessageObj.textUserName()
+			    	userName : textMessageObj.textUserName(),
+			    	replyToTextId : textMessageObj.replyToTextId()
+			    	
 			    }),
 			    success: function(data){ 
 			    	
