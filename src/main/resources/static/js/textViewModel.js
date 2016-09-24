@@ -2,7 +2,7 @@
 function textViewModel (httpRequests){
 	
 	var self = this;	
-	
+	globa = self;
 	self.createMessage = function(){
 		
 		return {		
@@ -10,6 +10,9 @@ function textViewModel (httpRequests){
 			textMessage : ko.observable(""),
 			replyToTextId : ko.observable(""),
 			city : ko.observable(""),
+			latitiude : ko.observable(""),
+			longitude : ko.observable(""),
+			temperature : ko.observable(""),
 			locationQuery : ko.observable("")
 		}		
 	}
@@ -26,11 +29,14 @@ function textViewModel (httpRequests){
 	self.newTextMessage = self.createMessage();
 	self.replyTextMessage = self.createMessage(); 
 	
+	self.isLoading = ko.observable(false);
+	
 	self.enableDoneButton = ko.computed(function() {
 	    return 	self.newTextMessage.textUserName() &&
 			    self.newTextMessage.textMessage() &&
 			    self.newTextMessage.city() &&
-			    self.newTextMessage.locationQuery(); 
+			    self.newTextMessage.locationQuery() &&
+			    !self.isLoading();
 	}, self);
 		
 	self.serverMessage = ko.observable("");
@@ -54,11 +60,13 @@ function textViewModel (httpRequests){
 	self.postReplyMessageCallback = function(){
 		
 		self.loadAllPostsByUser();
-		self.clearMessages(self.replyTextMessage);		
+		self.clearMessages(self.replyTextMessage);
+		self.isLoading(false);
 	}
 	
 	self.postReplyMessage = function(){
 
+		self.isLoading(true);
 		httpRequests.createText(self.postReplyMessageCallback, self.replyTextMessage );
 		
 	}	
@@ -68,7 +76,7 @@ function textViewModel (httpRequests){
 	self.loadAllPostsByUserCallback = function(data){
 		
 		self.allPostsByUser(data);
-		
+		self.isLoading(false);
 	}
 	
 	self.loadAllPostsByUser = function(){
@@ -84,16 +92,19 @@ function textViewModel (httpRequests){
 		
 		if(data.response.hasOwnProperty("results")){
 			
-			self.cityList([]);
+			self.cityList([]);		
+			
 			
 			for (var i = 0; i < data.response.results.length; i++){
 			
 				self.cityList.push({
 					"locationString" : data.response.results[i].city + " - " + data.response.results[i].state + "-" + data.response.results[i].country_name,
-					"locationQuery" : data.response.results[i].l						
-				})
+					"locationQuery" : data.response.results[i].zmw						
+				})				
 				
 			}
+			console.log("self.getCityListCallback  from self.getCityListCallback ")
+			self.getWeatherLookup(data.response.results[0].zmw,	self.getWeatherLookupCallback)
 			
 		}else{
 			
@@ -102,11 +113,35 @@ function textViewModel (httpRequests){
 		
 	}
 	
-
-	
 	self.getCityList = function(){
 		
 		httpRequests.getCityList(self.newTextMessage.city(), self.getCityListCallback );
+		
+	}
+	
+	self.getWeatherLookupCallback = function(data){
+		
+		if( 			
+			data.hasOwnProperty("location") && 
+			data.hasOwnProperty("current_observation")			
+		){
+						
+			self.newTextMessage.latitiude(data.location.lat);
+			self.newTextMessage.longitude(data.location.lon);
+			self.newTextMessage.temperature(data.current_observation.temp_c);
+			self.isLoading(false);
+			
+		}else{
+			
+			alert("Failed to retrive weather data");
+			
+		}
+	}
+	
+	self.getWeatherLookup = function(){
+		console.log("self.getWeatherLookup");
+		self.isLoading(true);
+		httpRequests.getWeatherLookup(self.newTextMessage.locationQuery(), self.getWeatherLookupCallback );
 		
 	}
 	

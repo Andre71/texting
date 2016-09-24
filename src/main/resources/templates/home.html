@@ -31,7 +31,10 @@
 					<!-- ko if : cityList().length > 0  -->						
 					<label for="province">Location:</label> 
 					<select class="form-control"
-							data-bind="options: cityList, value: newTextMessage.locationQuery, optionsText: 'locationString', optionsValue: 'locationQuery'"></select>
+							data-bind="options: cityList, value: newTextMessage.locationQuery, 
+										optionsText: 'locationString', optionsValue: 'locationQuery',
+										event : {change : getWeatherLookup }
+										"></select>
 					<!-- /ko -->			
 
 				</div>
@@ -40,7 +43,7 @@
 					<input type="text"
 						class="form-control" id="usr"
 						data-bind="value:newTextMessage.textUserName" />
-						
+<span data-bind="text:isLoading"></span>
 					<div class="text-right button-wrap">		
 						<button type="submit" class="btn btn-primary"
 							data-bind="click:postMessage, enable:enableDoneButton"

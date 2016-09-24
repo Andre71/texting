@@ -57,6 +57,23 @@ var httpRequets = {
 			    }
 			});			
 			
+		},
+		
+		getWeatherLookup : function(locationQuery, onSuccess){
+
+			$.ajax({
+			    url: '/weatherLookup?zmw=' + locationQuery,
+			    type: 'GET',
+			    contentType: "application/json",
+			    success: function(data){	
+			    	onSuccess(data);
+			    },
+			    error: function() {
+			        alert('Transmission Error'); 
+			    }
+			});			
+			
 		}
 		
+
 }

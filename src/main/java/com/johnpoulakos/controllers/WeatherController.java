@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -19,6 +20,17 @@ public class WeatherController {
 				
 		RestTemplate restTemplate = new RestTemplate();
 		String reponse = restTemplate.getForObject("http://api.wunderground.com/api/44d4a5cf50e1b318/geolookup/conditions/forecast/q/"+city+".json", 
+				String.class);		
+		
+		return new ResponseEntity<String>(reponse, HttpStatus.OK);
+		
+	}
+	
+	@RequestMapping(value="/weatherLookup", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody ResponseEntity<?> getWeatherLookup(@RequestParam("zmw") String zmw){			
+		System.out.println("http://api.wunderground.com/api/44d4a5cf50e1b318/geolookup/conditions/forecast/q/zmw:"+zmw+".json");
+		RestTemplate restTemplate = new RestTemplate();
+		String reponse = restTemplate.getForObject("http://api.wunderground.com/api/44d4a5cf50e1b318/geolookup/conditions/forecast/q/zmw:"+zmw+".json", 
 				String.class);		
 		
 		return new ResponseEntity<String>(reponse, HttpStatus.OK);
