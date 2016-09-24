@@ -1,14 +1,16 @@
 package com.johnpoulakos.services;
 
-
-import javax.persistence.OrderBy;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+
 import com.johnpoulakos.domain.Message;
 import com.johnpoulakos.domain.MessageDao;
+import com.johnpoulakos.domain.MessageGroup;
+import com.johnpoulakos.utils.MessageGroupBuilder;
 
 @Service
 public class MessageServiceImpl implements MessageService {
@@ -29,7 +31,17 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public  Iterable<Message> getAllMessages() {
 		
-		 return messageDao.findAll(new Sort(Sort.Direction.ASC, "userName"));
+		 return messageDao.findAll(new Sort(Sort.Direction.ASC, "createTimeStamp"));
+	}		
+	
+	@Override
+	public List<MessageGroup> getMessgeGroup(Iterable<Message> allMessages){	
+		
+		return MessageGroupBuilder.parseGroupMessage(allMessages);		
+		
 	}
+	
+
+	
 
 }

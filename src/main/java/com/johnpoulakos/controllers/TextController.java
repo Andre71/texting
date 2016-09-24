@@ -1,5 +1,7 @@
 package com.johnpoulakos.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.johnpoulakos.domain.Message;
+import com.johnpoulakos.domain.MessageGroup;
 import com.johnpoulakos.services.MessageService;
+import com.johnpoulakos.utils.MessageGroupBuilder;
 
 @RestController
 public class TextController {
@@ -37,6 +41,16 @@ public class TextController {
 	@ResponseBody ResponseEntity<?> getAlltexts(){			
 		
 		return new ResponseEntity<Iterable<Message>>(this.messageService.getAllMessages(), HttpStatus.OK);
+		
+	}
+	
+	@RequestMapping("/getAllTextsWithReplies")
+	@ResponseBody ResponseEntity<?> getAllTextsWithReplies(){			
+		
+		Iterable<Message> allMessages = this.messageService.getAllMessages();
+		List<MessageGroup> messageGrouplist = this.messageService.getMessgeGroup(allMessages);
+		
+		return new ResponseEntity<List<MessageGroup>>(MessageGroupBuilder.sortByUser(messageGrouplist), HttpStatus.OK);
 		
 	}
 

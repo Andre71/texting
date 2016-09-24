@@ -14,6 +14,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.johnpoulakos.TextingApplication;
 import com.johnpoulakos.domain.Message;
 import com.johnpoulakos.domain.MessageDao;
+import com.johnpoulakos.domain.MessageGroup;
+import com.johnpoulakos.utils.*;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -61,13 +63,15 @@ public class MessageServiceTest {
 			
 		}		
 
-		Iterable<Message> messages = this.messageService.getAllMessages();
+		Iterable<Message> messages = this.messageService.getAllMessages();		
+		List<MessageGroup> messageGroupList = this.messageService.getMessgeGroup(messages);
+		messageGroupList = MessageGroupBuilder.sortByUser(messageGroupList);
 		
 		int counter = 0;		
 		
-	    for (Message msg : messages) {	    	
-	
-	    	assertEquals(usersSorted[counter++], msg.getUserName());
+	    for (MessageGroup msgGroup : messageGroupList) {	    	
+	    	
+	    	assertEquals(usersSorted[counter++], msgGroup.getMessage().getUserName());
 	    		
 	    }
 		
