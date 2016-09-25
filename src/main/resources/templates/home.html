@@ -16,7 +16,7 @@
 
 		<form>
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-6">
 					<label for="textmsg">Enter Text:</label>
 					<textarea class="form-control" rows="4" id="textmsg"
 						data-bind="value:newTextMessage.textMessage"></textarea>
@@ -29,8 +29,9 @@
 								   event: {blur :  getCityList }" />
 					
 					<!-- ko if : cityList().length > 0  -->						
-					<label for="province">Location:</label> 
+					<label for="location">Location:</label> 
 					<select class="form-control"
+							id="location"
 							data-bind="options: cityList, value: newTextMessage.locationQuery, 
 										optionsText: 'locationString', optionsValue: 'locationQuery',
 										event : {change : getWeatherLookup }
@@ -38,7 +39,7 @@
 					<!-- /ko -->			
 
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-3">
 					<label for="usr">User Name:</label> 
 					<input type="text"
 						class="form-control" id="usr"
@@ -60,9 +61,9 @@
 		</div>
 
 
-		<hr />
-		<h4>All Submissions</h4>
+		<hr />		
 		<!-- ko if : allPostsByUser().length > 0 -->
+		<h4>All Submissions</h4>
 		<div class="row">
 			<div class="col-md-4">
 				<strong>Message:</strong>
@@ -131,26 +132,27 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Reply - <!--  ko text : replyTextMessage.replyToTextId() --><!-- /ko --></h4>
+					<h4 class="modal-title">Reply</h4>
 				</div>
 				<div class="modal-body">
 					<form>
 						<div class="row">
 							<div class="col-md-4">
-								<label for="textmsg">Enter Text:</label>
-								<textarea class="form-control" rows="4" id="textmsg"
+								<label for="textmsgReply">Enter Text:</label>
+								<textarea class="form-control" rows="4" id="textmsgReply"
 									data-bind="value:newTextMessage.textMessage"></textarea>
 							</div>
 							<div class="col-md-3">
-								<label for="usr">Your City:</label> 
+								<label for="usrReply">Your City:</label> 
 								<input type="text"
-									class="form-control" id="usr"
+									class="form-control" id="usrReply"
 									data-bind="value:newTextMessage.city,
 											   event: {blur :  getCityList }" />
 								
 								<!-- ko if : cityList().length > 0  -->						
-								<label for="province">Location:</label> 
+								<label for="locationReply">Location:</label> 
 								<select class="form-control"
+										id="locationReply"
 										data-bind="options: cityList, value: newTextMessage.locationQuery, 
 													optionsText: 'locationString', optionsValue: 'locationQuery',
 													event : {change : getWeatherLookup }
@@ -159,9 +161,9 @@
 			
 							</div>
 							<div class="col-md-3">
-								<label for="usr">User Name:</label> 
+								<label for="usrReply">User Name:</label> 
 								<input type="text"
-									class="form-control" id="usr"
+									class="form-control" id="usrReply"
 									data-bind="value:newTextMessage.textUserName" />
 							</div>
 			

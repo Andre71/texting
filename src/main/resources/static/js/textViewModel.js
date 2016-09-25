@@ -31,7 +31,7 @@ function textViewModel (httpRequests){
 	}
 
 	self.newTextMessage = self.createMessage();
-	self.replyTextMessage = self.createMessage(); 
+
 	
 	self.isLoading = ko.observable(false);
 	
@@ -60,21 +60,6 @@ function textViewModel (httpRequests){
 		httpRequests.createText(self.postTextSuccessCallback, self.newTextMessage );
 		
 	}	
-	
-	self.postReplyMessageCallback = function(){
-		
-		self.loadAllPostsByUser();
-		self.clearMessages(self.replyTextMessage);
-		self.isLoading(false);
-	}
-	
-	self.postReplyMessage = function(){
-
-		self.isLoading(true);
-		httpRequests.createText(self.postReplyMessageCallback, self.replyTextMessage );
-		
-	}	
-	
 	
 	self.allPostsByUser = ko.observableArray([]);	
 	self.loadAllPostsByUserCallback = function(data){

@@ -77,30 +77,7 @@ describe("the text view model", function () {
         expect(viewModel.newTextMessage.textUserName()).toBe("");
 
     	
-    })
-    
-    it("must invoke the postReplyMessageCallback method after postReplyMessage has been called ", function () {    	
-
-    	spyOn(viewModel, 'postReplyMessageCallback') 
-    	viewModel.replyTextMessage.textMessage("this is a message");
-    	viewModel.replyTextMessage.textUserName("myUserName");
-    	viewModel.replyTextMessage.replyToTextId(123);    	
-    	viewModel.postReplyMessage();    	
-        expect(viewModel.postReplyMessageCallback).toHaveBeenCalled();
-
     });
-
     
-    it("must clear the reply form once the postReplyMessage has been called ", function () {  
-    	
-    	viewModel.replyTextMessage.textMessage("this is a message");
-    	viewModel.replyTextMessage.textUserName("myUserName");
-    	viewModel.replyTextMessage.replyToTextId(123);    	
-    	viewModel.postReplyMessage();    	
-        expect(viewModel.replyTextMessage.textMessage()).toBe("");
-        expect(viewModel.replyTextMessage.textUserName()).toBe("");
-        expect(viewModel.replyTextMessage.replyToTextId()).toBe("");
-    	
-    })
 
 });
