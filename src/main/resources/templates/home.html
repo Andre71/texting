@@ -43,7 +43,7 @@
 					<input type="text"
 						class="form-control" id="usr"
 						data-bind="value:newTextMessage.textUserName" />
-<span data-bind="text:isLoading"></span>
+
 					<div class="text-right button-wrap">		
 						<button type="submit" class="btn btn-primary"
 							data-bind="click:postMessage, enable:enableDoneButton"
@@ -74,8 +74,14 @@
 		<!-- /ko -->
 		<!-- ko foreach : allPostsByUser() -->
 		<div class="row">
-			<div class="col-md-8">
+			<div class="col-md-4">
 				<span data-bind="text:message.messageText"></span>
+			</div>
+			<div class="col-md-3">
+				<div data-bind="text:message.city"></div>
+				<div data-bind="text:message.latitiude"></div>
+				<div data-bind="text:message.longitude"></div>
+				<div data-bind="text:message.temperature"></div>
 			</div>
 			<div class="col-md-2">
 				<span data-bind="text:message.userName"></span>
@@ -96,6 +102,12 @@
 				<div class="row reply">
 					<div class="col-md-8">
 						<span data-bind="text:messageText"></span>
+					</div>
+					<div class="col-md-3">
+						<div data-bind="text:city"></div>
+						<div data-bind="text:latitiude"></div>
+						<div data-bind="text:longitude"></div>
+						<div data-bind="text:temperature"></div>
 					</div>
 					<div class="col-md-4">
 						<span data-bind="text:userName"></span>
