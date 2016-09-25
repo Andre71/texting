@@ -64,10 +64,10 @@
 		<h4>All Submissions</h4>
 		<!-- ko if : allPostsByUser().length > 0 -->
 		<div class="row">
-			<div class="col-md-8">
+			<div class="col-md-4">
 				<strong>Message:</strong>
 			</div>
-			<div class="col-md-4">
+			<div class="col-md-3">
 				<strong>User:</strong>
 			</div>
 		</div>		
@@ -91,7 +91,7 @@
 					<button type="button" class="btn btn-secondary" 
 							data-toggle="modal"
 							data-target="#replyModal" 
-							data-bind="click:function($data){ $parent.replyTextMessage.replyToTextId($data.message.id) }"
+							data-bind="click:function($data){ $parent.newTextMessage.replyToTextId($data.message.id) }"
 							>Reply</button>
 				</div>							
 			</div>
@@ -100,7 +100,7 @@
 				<!-- ko foreach : replies -->
 
 				<div class="row reply">
-					<div class="col-md-8">
+					<div class="col-md-4">
 						<span data-bind="text:messageText"></span>
 					</div>
 					<div class="col-md-3">
@@ -109,7 +109,7 @@
 						<div data-bind="text:longitude"></div>
 						<div data-bind="text:temperature"></div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-2">
 						<span data-bind="text:userName"></span>
 					</div>
 				</div>					
@@ -136,26 +136,46 @@
 				<div class="modal-body">
 					<form>
 						<div class="row">
-							<div class="col-md-8">
-								<label for="textmsg">Enter Text:</label>
-								<textarea class="form-control" rows="3" id="textmsg"
-									data-bind="value:replyTextMessage.textMessage"></textarea>
-							</div>
 							<div class="col-md-4">
+								<label for="textmsg">Enter Text:</label>
+								<textarea class="form-control" rows="4" id="textmsg"
+									data-bind="value:newTextMessage.textMessage"></textarea>
+							</div>
+							<div class="col-md-3">
+								<label for="usr">Your City:</label> 
+								<input type="text"
+									class="form-control" id="usr"
+									data-bind="value:newTextMessage.city,
+											   event: {blur :  getCityList }" />
+								
+								<!-- ko if : cityList().length > 0  -->						
+								<label for="province">Location:</label> 
+								<select class="form-control"
+										data-bind="options: cityList, value: newTextMessage.locationQuery, 
+													optionsText: 'locationString', optionsValue: 'locationQuery',
+													event : {change : getWeatherLookup }
+													"></select>
+								<!-- /ko -->			
+			
+							</div>
+							<div class="col-md-3">
 								<label for="usr">User Name:</label> 
 								<input type="text"
 									class="form-control" id="usr"
-									data-bind="value:replyTextMessage.textUserName" />
-			
+									data-bind="value:newTextMessage.textUserName" />
 							</div>
+			
 						</div>
-					</form>					
+					</form>	
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-default"
+							data-bind="click:function(){ clearMessages(newTextMessage); }" 
+							data-dismiss="modal">Cancel</button>
+							
 					<button type="button" 
 							class="btn btn-primary" 
-							data-bind="click:function(){ postReplyMessage()}"
+							data-bind="click:postMessage, enable:enableDoneButton"
 							data-dismiss="modal"
 							>Reply</button>
 							

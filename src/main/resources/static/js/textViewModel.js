@@ -23,6 +23,10 @@ function textViewModel (httpRequests){
 		message.textMessage("");
 		message.replyToTextId("");
 		message.city("");
+		message.latitiude("");
+		message.longitude("");
+		message.temperature("");
+		message.locationQuery("");
 		self.cityList([]);
 	}
 
@@ -115,8 +119,9 @@ function textViewModel (httpRequests){
 	
 	self.getCityList = function(){
 		
-		httpRequests.getCityList(self.newTextMessage.city(), self.getCityListCallback );
-		
+		if(self.newTextMessage.city()){		
+			httpRequests.getCityList(self.newTextMessage.city().trim(), self.getCityListCallback );
+		}
 	}
 	
 	self.getWeatherLookupCallback = function(data){
