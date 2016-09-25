@@ -18,6 +18,14 @@ describe("the text view model", function () {
 				});
 				
 				onSuccess(allBackEndTextsStub);
+			},
+			getCityList :  function(message, onSuccess){
+				
+				onSuccess(onSuccess);
+			},
+			getWeatherLookup : function(message, onSuccess){
+				
+				onSuccess(onSuccess);
 			}
 	}
 	
@@ -77,7 +85,35 @@ describe("the text view model", function () {
         expect(viewModel.newTextMessage.textUserName()).toBe("");
 
     	
+    });    
+    
+    
+    it("must prevent submissions when form fields are blank", function () {  
+    	
+    	viewModel.newTextMessage.textMessage("this is a message");
+    	viewModel.newTextMessage.textUserName("");
+        expect(viewModel.enableDoneButton()).toBe("");
+    	
     });
     
+    
+    it("must not make an ajax call via getCityList if city is blank", function () {  
+    	
+    	 spyOn(viewModel, 'getCityListCallback')
+    	 viewModel.newTextMessage.city("");
+    	 viewModel.getCityList();
+    	 expect(viewModel.getCityListCallback).not.toHaveBeenCalled();
+    	
+    });
+    
+    it("must make an ajax call via getCityList if city is not blank", function () {  
+    	
+	   	 spyOn(viewModel, 'getCityListCallback')
+	   	 viewModel.newTextMessage.city("Tornoto");
+	   	 viewModel.getCityList();
+	   	 expect(viewModel.getCityListCallback).toHaveBeenCalled();
+   	
+   });
+
 
 });
