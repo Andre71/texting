@@ -10,10 +10,10 @@
 <body>
 	<div class="container">
 		<!-- Main hero unit for a primary marketing message or call to action -->
-		<div class="hero-unit">
+		<div class="hero-unit text-center">
 			<h1>Text Application</h1>
 		</div>
-
+		<h3>Post a New Text</h3>
 		<form>
 			<div class="row">
 				<div class="col-md-6">
@@ -68,28 +68,40 @@
 			<div class="col-md-4">
 				<strong>Message:</strong>
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-4">
+				<strong>Location:</strong>
+			</div>
+			<div class="col-md-2">
 				<strong>User:</strong>
 			</div>
 		</div>		
 		<!-- /ko -->
 		<!-- ko foreach : allPostsByUser() -->
-		<div class="row">
+		<div class="row post">
 			<div class="col-md-4">
 				<span data-bind="text:message.messageText"></span>
 			</div>
-			<div class="col-md-3">
-				<div data-bind="text:message.city"></div>
-				<div data-bind="text:message.latitiude"></div>
-				<div data-bind="text:message.longitude"></div>
-				<div data-bind="text:message.temperature"></div>
+			<div class="col-md-4">
+				<div>
+					<strong>City:</strong>			
+					<span data-bind="text:message.city"></span>
+					<strong>Temperature:</strong>
+					<span data-bind="text:message.temperature"></span>
+					&deg;C
+				</div>
+				<div>	
+					<strong>Longitude:</strong>
+					<span data-bind="text:message.longitude"></span>
+					<strong>Latitude:</strong>
+					<span data-bind="text:message.latitiude"></span>
+				</div>
 			</div>
 			<div class="col-md-2">
 				<span data-bind="text:message.userName"></span>
 			</div>
 			<div class="col-md-2">
 				<div class="text-right">	
-					<button type="button" class="btn btn-secondary" 
+					<button type="button" class="btn btn-default" 
 							data-toggle="modal"
 							data-target="#replyModal" 
 							data-bind="click:function($data){ $parent.newTextMessage.replyToTextId($data.message.id) }"
@@ -104,11 +116,20 @@
 					<div class="col-md-4">
 						<span data-bind="text:messageText"></span>
 					</div>
-					<div class="col-md-3">
-						<div data-bind="text:city"></div>
-						<div data-bind="text:latitiude"></div>
-						<div data-bind="text:longitude"></div>
-						<div data-bind="text:temperature"></div>
+					<div class="col-md-4">
+						<div>
+							<strong>City:</strong>			
+							<span data-bind="text:city"></span>
+							<strong>Temperature:</strong>
+							<span data-bind="text:temperature"></span>
+							&deg;C
+						</div>
+						<div>	
+							<strong>Longitude:</strong>
+							<span data-bind="text:longitude"></span>
+							<strong>Latitude:</strong>
+							<span data-bind="text:latitiude"></span>
+						</div>
 					</div>
 					<div class="col-md-2">
 						<span data-bind="text:userName"></span>
@@ -137,7 +158,7 @@
 				<div class="modal-body">
 					<form>
 						<div class="row">
-							<div class="col-md-4">
+							<div class="col-md-6">
 								<label for="textmsgReply">Enter Text:</label>
 								<textarea class="form-control" rows="4" id="textmsgReply"
 									data-bind="value:newTextMessage.textMessage"></textarea>

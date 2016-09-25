@@ -1,3 +1,6 @@
-.row.reply{margin-left : 1em;}
+.container{color: #4A96AD; background-color: #404040;}
+.row.reply{margin-left : 1em; color:#fff; background-color:#4A96AD;}
+.post{ background-color: #7D1935; color:#fff;}
 .button-wrap{margin-top: 1.8em; pading:0;}
 label{display:block;}
+
