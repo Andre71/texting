@@ -28,7 +28,7 @@ public class WeatherController {
 	
 	@RequestMapping(value="/weatherLookup", method=RequestMethod.GET, produces=MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody ResponseEntity<?> getWeatherLookup(@RequestParam("zmw") String zmw){			
-		System.out.println("http://api.wunderground.com/api/44d4a5cf50e1b318/geolookup/conditions/forecast/q/zmw:"+zmw+".json");
+
 		RestTemplate restTemplate = new RestTemplate();
 		String reponse = restTemplate.getForObject("http://api.wunderground.com/api/44d4a5cf50e1b318/geolookup/conditions/forecast/q/zmw:"+zmw+".json", 
 				String.class);		

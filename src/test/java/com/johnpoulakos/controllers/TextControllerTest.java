@@ -24,7 +24,7 @@ import com.johnpoulakos.domain.Message;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = TextingApplication.class)
 @WebAppConfiguration
-public class TextControllerTests {
+public class TextControllerTest {
 	
 	private MockMvc mockMvc;
 	
