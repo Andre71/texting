@@ -2,7 +2,7 @@
 function textViewModel (httpRequests){
 	
 	var self = this;	
-	globa = self;
+
 	self.createMessage = function(){
 		
 		return {		
@@ -103,7 +103,7 @@ function textViewModel (httpRequests){
 				})				
 				
 			}
-			console.log("self.getCityListCallback  from self.getCityListCallback ")
+			
 			self.getWeatherLookup(data.response.results[0].zmw,	self.getWeatherLookupCallback)
 			
 		}else{
@@ -139,7 +139,7 @@ function textViewModel (httpRequests){
 	}
 	
 	self.getWeatherLookup = function(){
-		console.log("self.getWeatherLookup");
+		
 		self.isLoading(true);
 		httpRequests.getWeatherLookup(self.newTextMessage.locationQuery(), self.getWeatherLookupCallback );
 		

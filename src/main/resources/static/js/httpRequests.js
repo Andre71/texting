@@ -12,7 +12,10 @@ var httpRequets = {
 			    	messageText : textMessageObj.textMessage(), 			
 			    	userName : textMessageObj.textUserName(),
 			    	replyToTextId : textMessageObj.replyToTextId(),
-			    	city : textMessageObj.city()		    	
+			    	city : textMessageObj.city(),
+					latitiude : textMessageObj.latitiude(),
+					longitude : textMessageObj.longitude(),
+					temperature : textMessageObj.temperature()
 			    	
 			    }),
 			    success: function(data){ 

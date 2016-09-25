@@ -33,6 +33,14 @@ public class Message {
 	private String messageText;
 	
 	private String userName;
+	
+	private String city;
+	
+	private String latitiude;
+	
+	private String longitude;
+	
+	private String temperature;
 
 	public Integer getId() {
 		return id;
@@ -72,6 +80,38 @@ public class Message {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getLatitiude() {
+		return latitiude;
+	}
+
+	public void setLatitiude(String latitiude) {
+		this.latitiude = latitiude;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
+	public String getTemperature() {
+		return temperature;
+	}
+
+	public void setTemperature(String temperature) {
+		this.temperature = temperature;
 	}
 
 }
