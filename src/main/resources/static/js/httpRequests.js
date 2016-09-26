@@ -1,11 +1,11 @@
 "use strict";
 
 var httpRequets = {
-		
+		path : window.location.pathname.replace("/home",""),
 		createText : function(onSuccess, textMessageObj){
 			
 			$.ajax({
-			    url: '/createText',
+			    url: httpRequets.path + '/createText',
 			    type: 'POST',
 			    contentType: "application/json",
 			    data : JSON.stringify({			    	
@@ -33,7 +33,7 @@ var httpRequets = {
 		getAllposts : function(onSuccess){
 			
 			$.ajax({
-			    url: '/getAllTextsWithReplies',
+			    url: httpRequets.path + '/getAllTextsWithReplies',
 			    type: 'GET',
 			    contentType: "application/json",
 			    success: function(data){	    	
@@ -49,7 +49,7 @@ var httpRequets = {
 		getCityList : function(cityName, onSuccess){
 
 			$.ajax({
-			    url: '/cityLookup/' + cityName,
+			    url: httpRequets.path + '/cityLookup/' + cityName,
 			    type: 'GET',
 			    contentType: "application/json",
 			    success: function(data){	
@@ -65,7 +65,7 @@ var httpRequets = {
 		getWeatherLookup : function(locationQuery, onSuccess){
 
 			$.ajax({
-			    url: '/weatherLookup?zmw=' + locationQuery,
+			    url: httpRequets.path + '/weatherLookup?zmw=' + locationQuery,
 			    type: 'GET',
 			    contentType: "application/json",
 			    success: function(data){	
